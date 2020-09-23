@@ -218,6 +218,18 @@ config FASTBOOT_CMD_OEM_BOOTBUS
 	  Add support for the "oem bootbus" command from a client. This set
 	  the mmc boot configuration for the selecting eMMC device.
 
+config FASTBOOT_USE_BCB_SET_REBOOT_FLAG
+	bool "Use BCB by fastboot to set boot reason"
+	depends on CMD_BCB && !ARCH_ROCKCHIP && !TARGET_KC1 && \
+	  !TARGET_SNIPER && !TARGET_AM57XX_EVM && !TARGET_DRA7XX_EVM
+	default y
+	help
+	  Fastboot could implement setting of reboot reason in a generic fashion
+	  via BCB commands. BCB commands are able to write reboot reason into
+	  command field of boot control block. In general case it is sufficient
+	  implementation if your platform supports BCB commands and doesn't
+	  require any specific reboot reason handling.
+
 endif # FASTBOOT
 
 endmenu

@@ -11,6 +11,10 @@
 
 #include <linux/sizes.h>
 
+#ifndef CONTROL_PARTITION
+#define CONTROL_PARTITION "misc"
+#endif
+
 #ifndef BOOT_PARTITION
 #define BOOT_PARTITION "boot"
 #endif
