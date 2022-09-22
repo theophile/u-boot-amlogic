@@ -48,6 +48,27 @@
 		};
 	};
 
+        backlight: backlight {
+                compatible = "pwm-backlight";
+                pwms = <&pwm_AO_ab 0 1000000 0>;
+                brightness-levels = <0 255>;
+                num-interpolated-steps = <255>;
+                default-brightness-level = <255>;
+                status = "okay";
+        };
+
+        panel {
+		compatible = "simple-panel";
+		backlight = <&backlight>;
+                status = "okay";
+                port {
+			panel_in: endpoint {
+				remote-endpoint = <&hdmi_connector_in>;
+			};
+		};
+
+	};
+
 	emmc_pwrseq: emmc-pwrseq {
 		compatible = "mmc-pwrseq-emmc";
 		reset-gpios = <&gpio BOOT_12 GPIO_ACTIVE_LOW>;
@@ -277,6 +298,16 @@
 	pinctrl-0 = <&remote_input_ao_pins>;
 	pinctrl-names = "default";
 };
+
+&pwm_AO_ab {
+        u-boot,dm-spl;
+        pinctrl-0 = <&pwm_ao_a_pins>;
+        pinctrl-names = "default";
+        clocks = <&xtal>;
+        clock-names = "clkin3";
+        status = "okay";
+};
+
 
 &pwm_AO_cd {
 	pinctrl-0 = <&pwm_ao_d_e_pins>;
