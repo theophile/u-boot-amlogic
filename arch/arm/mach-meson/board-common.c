@@ -23,10 +23,7 @@
 #include <u-boot/crc.h>
 
 #include <asm/psci.h>
-#include <fastboot.h>
 #include <linux/usb/gadget.h>
-
-#endif
 
 #if CONFIG_IS_ENABLED(FASTBOOT_FLASH_CUSTOM) && CONFIG_IS_ENABLED(MMC_WRITE)
 
